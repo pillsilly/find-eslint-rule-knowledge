@@ -1,0 +1,23 @@
+{
+  "skill_name": "eslint-rule-knowledge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use the ESLint repo docs for this workspace and explain what core rule no-unused-vars means, why it fires, and how to fix it with one failing and one passing example.",
+      "expected_output": "Uses the workspace package-lock version, resolves the upstream core rule doc, and explains meaning, fixes, examples, and trade-offs.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I have an ESLint error for eqeqeq. Ground the answer in the exact ESLint version used by this project and cache the rule knowledge locally.",
+      "expected_output": "Resolves the exact ESLint version, reads the core rule doc, and mentions the cache path under .tmp/eslint-rule-knowledge.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Explain @typescript-eslint/no-unused-vars from the ESLint repo docs.",
+      "expected_output": "Correctly says the rule is not a core ESLint rule and does not pretend the upstream eslint/eslint docs cover it.",
+      "files": []
+    }
+  ]
+}
