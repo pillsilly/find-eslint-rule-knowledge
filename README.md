@@ -1,4 +1,4 @@
-# eslint-rule-knowledge
+# find-eslint-rule-knowlege
 
 > Provide precise, version-aligned explanations for core ESLint rules.
 
