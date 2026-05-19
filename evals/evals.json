@@ -10,13 +10,19 @@
     {
       "id": 2,
       "prompt": "I have an ESLint error for eqeqeq. Ground the answer in the exact ESLint version used by this project and cache the rule knowledge locally.",
-      "expected_output": "Resolves the exact ESLint version, reads the core rule doc, and mentions the cache path under .tmp/eslint-rule-knowledge.",
+      "expected_output": "Resolves the exact ESLint version, reads the core rule doc, and mentions the cache path under .tmp/eslint-rule-knowledge/eslint-repo.",
       "files": []
     },
     {
       "id": 3,
       "prompt": "Explain @typescript-eslint/no-unused-vars from the ESLint repo docs.",
       "expected_output": "Correctly says the rule is not a core ESLint rule and does not pretend the upstream eslint/eslint docs cover it.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Use the ESLint repo docs for the rule `no-unused-vars` in this workspace and include the `Source` section verbatim (cache location + local doc path). Make sure the `Source` mentions the workspace-local cached ESLint repo under `.tmp/eslint-rule-knowledge/eslint-repo` (not any hardcoded `/code/...` path).",
+      "expected_output": "Includes a Source section and mentions `.tmp/eslint-rule-knowledge/eslint-repo` as the cached ESLint repo location for the resolved core rule doc.",
       "files": []
     }
   ]

@@ -1,6 +1,6 @@
 # find-eslint-rule-knowlege
 
-> Provide precise, version-aligned explanations for core ESLint rules.
+> Provide precise, version-aligned explanations\fix-examples for core ESLint rules.
 
 This skill resolves and caches core ESLint rule documentation from the upstream `eslint/eslint` repository and produces concise summaries tailored to the ESLint version used by a workspace.
 
@@ -25,6 +25,14 @@ node scripts/resolve_eslint_rule_doc.js --workspace /path/to/workspace --rule no
 
 The resolver prints JSON including `eslintVersion`, `ruleId`, `isCoreRule`, `docFound`, `docPath`, `cacheDir`, `sourceCachePath`, and `summaryCachePath`.
 
+## Smoke test
+
+To sanity-check the resolver end-to-end (workspace-local default + `--eslint-repo` override), run:
+
+```bash
+node scripts/smoke_test_eslint_rule_knowledge.js
+```
+
 If `docFound` is true, the skill will read the cached `source.md` and synthesize a `summary.md` at:
 
 ```
@@ -45,9 +53,9 @@ Summaries follow this structure:
 
 ## Caching and safety
 
-- Cache location: `.tmp/eslint-rule-knowledge/` in the target workspace.
+- Cache location: `.tmp/eslint-rule-knowledge/` in the target workspace, including the auto-cloned ESLint repo at `.tmp/eslint-rule-knowledge/eslint-repo`.
 - Key format: `<eslint-version>:<rule-id>` — prefer cached summaries when present.
-- Do not reset or rewrite the primary `/code/3rdparty/eslint` clone; resolve docs via git tags and cache results instead.
+- Do not reset or rewrite the cached ESLint repo; resolve docs via git tags and cache results instead.
 
 ## Contribution
 

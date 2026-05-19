@@ -3,7 +3,6 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const DEFAULT_REPO = path.resolve('/code/3rdparty/eslint');
 const REPO_URL = 'https://github.com/eslint/eslint.git';
 
 function run(cmd, args, cwd) {
@@ -57,6 +56,11 @@ function sanitizeRuleId(ruleId) {
   return ruleId.trim();
 }
 
+function resolveRepoPath(workspace, eslintRepoArg) {
+  if (eslintRepoArg) return path.resolve(eslintRepoArg);
+  return path.join(workspace, '.tmp', 'eslint-rule-knowledge', 'eslint-repo');
+}
+
 function isCoreRule(ruleId) {
   return ruleId && ruleId.indexOf('/') === -1;
 }
@@ -88,13 +92,12 @@ function main() {
 
   const workspace = path.resolve(args.workspace);
   const ruleId = sanitizeRuleId(args.rule);
-  const repoPath = path.resolve(args.eslintRepo || DEFAULT_REPO);
-
   const packageLockJson = loadPackageLock(workspace);
   const eslintVersion = resolveEslintVersion(packageLockJson);
 
   const cacheRoot = path.join(workspace, '.tmp', 'eslint-rule-knowledge');
   const indexPath = path.join(cacheRoot, 'index.json');
+  const repoPath = resolveRepoPath(workspace, args.eslintRepo);
   const versionRuleDir = path.join(cacheRoot, eslintVersion, ruleId.replace('/', '__'));
   fs.mkdirSync(versionRuleDir, { recursive: true });
 

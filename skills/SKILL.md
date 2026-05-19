@@ -11,9 +11,9 @@ This skill is specifically for core ESLint rules documented in the `eslint/eslin
 
 ## What this skill does
 
-1. Ensures a local clone of `eslint/eslint` exists at `/code/3rdparty/eslint`.
+1. Ensures a local clone of `eslint/eslint` exists under the workspace cache at `.tmp/eslint-rule-knowledge/eslint-repo`.
 2. Reads the exact ESLint version used by the current workspace from `package-lock.json`.
-3. Resolves the exact ESLint git tag for the version used by the current project without destructively rewriting the main clone.
+3. Resolves the exact ESLint git tag for the version used by the current project without destructively rewriting the cached checkout.
 4. Locates the matching rule documentation under `docs/src/rules/<rule>.md`.
 5. Caches the source doc and lookup metadata under the workspace `.tmp/eslint-rule-knowledge/` directory.
 6. Produces a concise explanation of the rule: meaning, why it triggers, how to fix it, examples, and trade-offs.
@@ -22,7 +22,7 @@ This skill is specifically for core ESLint rules documented in the `eslint/eslin
 
 You need all of the following before answering:
 
-- The workspace root, for example `/code/em3`
+- The workspace root, for example `/path/to/workspace`
 - The ESLint rule id, for example `no-unused-vars`
 - A local `package-lock.json` in that workspace
 
@@ -119,14 +119,14 @@ If there is already a cached `summary.md`, you can use it directly and only re-o
 
 ## Safety and repo handling
 
-- Do not hard reset or discard changes in `/code/3rdparty/eslint`.
-- Do not switch the main clone's working tree to another version.
+- Do not hard reset or discard changes in the cached ESLint repo under `.tmp/eslint-rule-knowledge/eslint-repo`.
+- Do not switch the cached checkout's working tree to another version.
 - Resolve docs from the exact git tag for the workspace's ESLint version and cache the result under `.tmp`.
 - If the repo does not exist, the resolver may clone it.
 
 ## Good defaults
 
--- Assume `3rdparty/eslint` (workspace-relative) is the preferred source repo path.
+- Assume the workspace-local `.tmp/eslint-rule-knowledge/eslint-repo` checkout is the preferred source repo path.
 - Assume `package-lock.json` is at the workspace root.
 - Treat rule ids containing `/` as non-core unless you have explicit evidence otherwise.
 
