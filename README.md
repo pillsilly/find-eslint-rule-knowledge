@@ -1,5 +1,10 @@
 # find-eslint-rule-knowlege
 
+```
+#Install:
+npx skills add pillsilly/find-eslint-rule-knowledge -g
+```
+
 > Provide precise, version-aligned explanations\fix-examples for core ESLint rules.
 
 This skill resolves and caches core ESLint rule documentation from the upstream `eslint/eslint` repository and produces concise summaries tailored to the ESLint version used by a workspace.
